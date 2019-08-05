@@ -1,11 +1,11 @@
-async function runSingleTest(message, fn) {
+async function runSingleTest(message, test) {
   console.log();
   let output = `should ${message}`;
   console.log(output + ":");
   try {
-    let result = await fn();
+    let result = await test();
     console.log("√ " + output);
-    return Promise.resolve();
+    return true;
   } catch (error) {
     output += " x";
     console.error(error);
@@ -14,11 +14,11 @@ async function runSingleTest(message, fn) {
 }
 
 const onlyQueue = [];
-function should(message, fn) {
-  should.queue.push({ message, fn });
+function should(message, test) {
+  should.queue.push({ message, test });
 }
-should.only = (message, fn) => {
-  onlyQueue.push({ message, fn });
+should.only = (message, test) => {
+  onlyQueue.push({ message, test });
 };
 should.queue = [];
 should.onlyQueue = [];
@@ -26,7 +26,7 @@ should.onlyQueue = [];
 should.run = async () => {
   if (onlyQueue.length) should.queue = onlyQueue;
   for (const test of should.queue) {
-    await runSingleTest(test.message, test.fn);
+    await runSingleTest(test.message, test.test);
   }
 };
 
