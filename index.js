@@ -9,7 +9,7 @@ async function runSingleTest(message, test) {
   } catch (error) {
     output += " x";
     console.error(error);
-    return Promise.reject(error);
+    throw error;
   }
 }
 
