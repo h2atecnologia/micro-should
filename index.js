@@ -1,10 +1,10 @@
 const red = "\x1b[31m";
 const green = "\x1b[32m";
-const reset = "\x1b[0m"
+const reset = "\x1b[0m";
 
-async function run({message, test, skip}) {
+async function run({ message, test, skip }) {
   console.log();
-  let output = `should ${message.replace(/^should\s+/, '')}`;
+  let output = `should ${message.replace(/^should\s+/, "")}`;
   console.log(`☆ ${output}:`);
   if (skip) {
     console.log(`(skip) ${output}`);
@@ -15,7 +15,7 @@ async function run({message, test, skip}) {
     console.log(`${green}✓ ${output}${reset}`);
     return true;
   } catch (error) {
-    console.error(`${red}☓ ${output}${reset}`)
+    console.error(`${red}☓ ${output}${reset}`);
     throw error;
   }
 }
@@ -23,8 +23,8 @@ async function run({message, test, skip}) {
 let queue = [];
 let only;
 const should = (message, test) => queue.push({ message, test });
-should.only = (message, test) => only = { message, test };
-should.skip = (message, test) => queue.push({ message, test, skip: true})
+should.only = (message, test) => (only = { message, test });
+should.skip = (message, test) => queue.push({ message, test, skip: true });
 should.run = async () => {
   const items = only ? [only] : queue;
   for (const test of items) {

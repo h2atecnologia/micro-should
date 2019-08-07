@@ -1,4 +1,4 @@
-const {should} = require(".");
+const { should } = require(".");
 const assert = require("assert"); // built-in node.js assertion
 
 should("add two numbers together", () => {
@@ -6,7 +6,9 @@ should("add two numbers together", () => {
 });
 
 should("catch errors", () => {
-  assert.throws(() => { throw new Error("invalid"); });
+  assert.throws(() => {
+    throw new Error("invalid");
+  });
   // throw new Error("invalid");
 });
 
