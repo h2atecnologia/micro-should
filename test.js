@@ -7,7 +7,7 @@ should("add two numbers together", () => {
 
 should("catch errors", () => {
   assert.throws(() => { throw new Error("invalid"); });
-  throw new Error("invalid");
+  // throw new Error("invalid");
 });
 
 should("produce correct promise result", async () => {

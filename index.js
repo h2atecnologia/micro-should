@@ -1,32 +1,34 @@
-async function runSingleTest(message, test) {
+const red = "\x1b[31m";
+const green = "\x1b[32m";
+const reset = "\x1b[0m"
+
+async function run({message, test, skip}) {
   console.log();
-  let output = `should ${message}`;
-  console.log(output + ":");
+  let output = `should ${message.replace(/^should\s+/, '')}`;
+  console.log(`☆ ${output}:`);
+  if (skip) {
+    console.log(`(skip) ${output}`);
+    return true;
+  }
   try {
     let result = await test();
-    console.log("√ " + output);
+    console.log(`${green}✓ ${output}${reset}`);
     return true;
   } catch (error) {
-    output += " x";
-    console.error(error);
+    console.error(`${red}☓ ${output}${reset}`)
     throw error;
   }
 }
 
-const onlyQueue = [];
-function should(message, test) {
-  should.queue.push({ message, test });
-}
-should.only = (message, test) => {
-  onlyQueue.push({ message, test });
-};
-should.queue = [];
-should.onlyQueue = [];
-
+let queue = [];
+let only;
+const should = (message, test) => queue.push({ message, test });
+should.only = (message, test) => only = { message, test };
+should.skip = (message, test) => queue.push({ message, test, skip: true})
 should.run = async () => {
-  if (onlyQueue.length) should.queue = onlyQueue;
-  for (const test of should.queue) {
-    await runSingleTest(test.message, test.test);
+  const items = only ? [only] : queue;
+  for (const test of items) {
+    await run(test);
   }
 };
 

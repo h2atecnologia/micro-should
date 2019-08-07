@@ -3,8 +3,17 @@
   "version": "0.1.0",
   "description": "Ultra-simple testing framework without dependencies. Supports async cases.",
   "main": "index.js",
+  "files": [
+    "index.js",
+    "index.d.ts"
+  ],
   "scripts": {
-    "test": "test.js"
+    "test": "node test.js"
+  },
+  "homepage": "https://github.com/paulmillr/micro-should",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/paulmillr/micro-should.git"
   },
   "author": "Paul Miller (https://paulmillr.com)",
   "license": "MIT"

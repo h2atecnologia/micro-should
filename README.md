@@ -4,13 +4,15 @@ Minimal testing framework. Zero dependencies, async support.
 
 Works with any assertion library.
 
+> npm install micro-should
+
 ## Usage
 
 ```js
 const {should} = require("micro-should");
 
 // Built-in node.js assertion lib.
-// You can use any other library, like Chai or Expect.
+// You can use any other library, like Chai.js or Expect.js.
 const assert = require("assert");
 
 should("add two numbers together", () => {
@@ -30,6 +32,10 @@ should("produce correct promise result", async () => {
 // should.only("execute only one test", () => {
 //   assert.ok(true);
 // });
+
+// should.skip("disable one test by using skip", () => {
+//   assert.ok(false); // would not execute
+// })
 
 // Execute this at the end of a file.
 should.run();
