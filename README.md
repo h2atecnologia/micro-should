@@ -6,6 +6,8 @@ Works with any assertion library.
 
 > npm install micro-should
 
+![](https://raw.githubusercontent.com/paulmillr/micro-should/master/screenshot.png)
+
 ## Usage
 
 ```js
