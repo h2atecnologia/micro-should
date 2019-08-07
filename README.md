@@ -1,6 +1,6 @@
 # micro-should
 
-Minimal testing framework. Zero dependencies, async support.
+Ultra-simple testing framework without dependencies. Supports async cases.
 
 Works with any assertion library.
 
