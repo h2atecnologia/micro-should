@@ -30,6 +30,8 @@ should.run = async () => {
   for (const test of items) {
     await run(test);
   }
+  queue = [];
+  only = undefined;
 };
 
 exports.should = should;
