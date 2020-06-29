@@ -25,13 +25,15 @@ let only;
 const should = (message, test) => queue.push({ message, test });
 should.only = (message, test) => (only = { message, test });
 should.skip = (message, test) => queue.push({ message, test, skip: true });
-should.run = async () => {
+should.run = () => {
   const items = only ? [only] : queue;
-  for (const test of items) {
-    await run(test);
-  }
   queue = [];
   only = undefined;
+  (async () => {
+    for (const test of items) {
+      await run(test);
+    }
+  })();
 };
 
 exports.should = should;
